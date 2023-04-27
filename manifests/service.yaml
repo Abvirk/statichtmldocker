@@ -12,7 +12,6 @@ spec:
   ipFamilyPolicy: SingleStack
   ports:
   - name: http
-    nodePort: 31153
     port: 80
     protocol: TCP
     targetPort: 8080
