@@ -1,3 +1,32 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: statichtml-service
+  namespace: default
+spec:
+  clusterIP: 172.17.36.104
+  clusterIPs:
+  - 172.17.36.104
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    nodePort: 31153
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app.kubernetes.io/name: statichtml
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}
+
+
 # apiVersion: v1
 # kind: Service
 # metadata:
@@ -5,23 +34,11 @@
 #   namespace: default
 # spec:
 #   type: NodePort
+#   ports:
+#   - name: http
+#     port: 80
+#     targetPort: 8080
+#     protocol: TCP
+#     NodePort: 31153
 #   selector:
 #     app: statichtml
-#   ports:
-#   - port: 80
-#     protocol: TCP
-#     targetPort: 80
-apiVersion: v1
-kind: Service
-metadata:
-  name: statichtml-service
-  namespace: default
-spec:
-  type: NodePort
-  ports:
-  - name: http
-    port: 80
-    targetPort: 8080
-    protocol: TCP
-  selector:
-    app: statichtml
