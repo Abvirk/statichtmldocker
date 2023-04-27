@@ -6,15 +6,15 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: statichtml
+      app: statichtml-app
   replicas: 1
   template:
     metadata:
       labels:
-        app: statichtml
+        app: statichtml-app
     spec:
       containers:
-      - name: statichtml
+      - name: statichtml-app
         image: abvirk/statichtml:1
         ports:
         - containerPort: 8080

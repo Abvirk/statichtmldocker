@@ -17,7 +17,7 @@ spec:
     protocol: TCP
     targetPort: 8080
   selector:
-    app.kubernetes.io/name: statichtml
+    app.kubernetes.io/name: statichtml-app
   sessionAffinity: None
   type: NodePort
 status:
