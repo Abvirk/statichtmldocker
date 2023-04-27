@@ -52,7 +52,7 @@ pipeline {
         stage('Build-Docker-Image') {
             steps {
                 container('docker') {
-                    sh 'docker build -t abvirk/statichtml:2 .'
+                    sh 'docker build -t abvirk/statichtml:${BUILD_NUMBER} .'
                 }
             }
         }
@@ -68,7 +68,7 @@ pipeline {
             steps {
                 /* groovylint-disable-next-line DuplicateStringLiteral */
                 container('docker') {
-                    sh 'docker push abvirk/statichtml:2'
+                    sh 'docker push abvirk/statichtml:${BUILD_NUMBER}'
                 }
             }
         }
@@ -86,7 +86,7 @@ pipeline {
                     sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deployment.yml
                     git add deployment.yml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
-                    git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/statichtmldocker HEAD:main
+                    git push https://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@github.com/abvirk/statichtmldocker HEAD:main
                 '''
                     }
                 }
