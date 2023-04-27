@@ -2,39 +2,18 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: statichtml-service
-  namespace: default
+  labels:
+    io.kompose.service: statichtml
+  name: statichtml
 spec:
-  externalTrafficPolicy: Cluster
-  internalTrafficPolicy: Cluster
-  ipFamilies:
-  - IPv4
-  ipFamilyPolicy: SingleStack
-  ports:
-  - name: http
-    port: 8080
-    protocol: TCP
-    targetPort: 8080
-  selector:
-    app.kubernetes.io/name: statichtml-app
-  sessionAffinity: None
   type: NodePort
+  ports:
+    - name: "8080"
+      port: 8080
+      nodePort: 32762
+      targetPort: 80
+  selector:
+    io.kompose.service: statichtml
 status:
   loadBalancer: {}
 
-
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: statichtml-service
-#   namespace: default
-# spec:
-#   type: NodePort
-#   ports:
-#   - name: http
-#     port: 80
-#     targetPort: 8080
-#     protocol: TCP
-#     NodePort: 31153
-#   selector:
-#     app: statichtml
