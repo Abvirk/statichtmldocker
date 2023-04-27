@@ -13,7 +13,7 @@ pipeline {
             spec:
               containers:
                 - name: maven
-                  image: maven:alpine
+                  image: abhishekf5/maven-abhishek-docker-agent:v1
                   command:
                   - cat
                   tty: true
@@ -76,17 +76,18 @@ pipeline {
             steps {
                 /* groovylint-disable-next-line DuplicateStringLiteral */
                 container('maven') {
-                    /* groovylint-disable-next-line NestedBlockDepth */
-                    /* groovylint-disable-next-line GStringExpressionWithinString */
-                    sh '''
+                    withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
+                        sh '''
                     git config user.email "se.abvirk@gmail.com"
                     git config user.name "Abrar Ahmad"
                     BUILD_NUMBER=${BUILD_NUMBER}
-                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deployment.yml
-                    git add deployment.yml
+                    
+                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" manifests/deployment.yaml
+                    git add manifests/deployment.yaml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
-                    git push https://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@github.com/abvirk/statichtmldocker HEAD:main
-                '''
+                    git push "https://${GITHUB_TOKEN}@github.com/Abvirk/statichtmldocker.git"  
+   '''
+                    }
                 }
             }
         }
