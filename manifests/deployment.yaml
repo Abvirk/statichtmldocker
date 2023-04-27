@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: statichtml
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: statichtml
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: statichtml
+    spec:
+      containers:
+      - name: statichtml
+        image: abvirk/statichtml:1
+        ports:
+        - containerPort: 8080
