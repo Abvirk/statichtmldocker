@@ -77,18 +77,16 @@ pipeline {
                 /* groovylint-disable-next-line DuplicateStringLiteral */
                 container('maven') {
                     /* groovylint-disable-next-line NestedBlockDepth */
-                    withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
-                        /* groovylint-disable-next-line GStringExpressionWithinString */
-                        sh '''
+                    /* groovylint-disable-next-line GStringExpressionWithinString */
+                    sh '''
                     git config user.email "se.abvirk@gmail.com"
                     git config user.name "Abrar Ahmad"
                     BUILD_NUMBER=${BUILD_NUMBER}
                     sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deployment.yml
                     git add deployment.yml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
-                    git push https://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@github.com/abvirk/statichtmldocker HEAD:main
+                    git push https://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@github.com/abvirk/statichtmldocker HEAD:main
                 '''
-                    }
                 }
             }
         }
