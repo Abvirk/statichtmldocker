@@ -5,9 +5,6 @@ metadata:
   name: statichtml-service
   namespace: default
 spec:
-  clusterIP: 172.17.36.104
-  clusterIPs:
-  - 172.17.36.104
   externalTrafficPolicy: Cluster
   internalTrafficPolicy: Cluster
   ipFamilies:
