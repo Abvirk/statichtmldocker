@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: statichtml
-        image: abvirk/statichtml:32
+        image: abvirk/statichtml:34
         ports:
         - containerPort: 80
