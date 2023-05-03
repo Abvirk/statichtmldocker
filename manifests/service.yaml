@@ -14,7 +14,7 @@ spec:
   - name: http
     port: 8080
     protocol: TCP
-    targetPort: 80
+    targetPort: 8080
     nodePort: 32762
   selector:
     app.kubernetes.io/name: statichtml
