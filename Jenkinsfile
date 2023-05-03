@@ -81,8 +81,8 @@ pipeline {
                     git config user.email "se.abvirk@gmail.com"
                     git config user.name "Abrar Ahmad"
                     BUILD_NUMBER=${BUILD_NUMBER}
-                    
-                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" manifests/deployment.yaml
+                    OLD_BUILD_NUMBER=$(( BUILD_NUMBER - 1))
+                    sed -i "s/statichtml:${OLD_BUILD_NUMBER}/statichtml:${BUILD_NUMBER}/g" manifests/deployment.yaml
                     git add manifests/deployment.yaml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                     git push "https://${GITHUB_TOKEN}@github.com/Abvirk/statichtmldocker.git"  
