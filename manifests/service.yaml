@@ -8,8 +8,8 @@ spec:
   selector:
     app: statichtml
   ports:
-  - port: 80
+  - port: 8080
     name: http
     protocol: TCP
-    targetPort: 80
+    targetPort: 8080
     nodePort: 32762
